@@ -25,15 +25,10 @@ dependencies {
 
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
-//	implementation("org.springframework.boot:spring-boot-starter-webflux")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-
-    // Projectreactor
-//	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-//	testImplementation("io.projectreactor:reactor-test")
 
     // Persistance
     implementation("org.flywaydb:flyway-core")
@@ -43,18 +38,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.10.4")
 
-//    testImplementation("org.mockito:mockito-core:3.3.3")
-
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-
-    // GCP
-//	implementation("org.springframework.cloud:spring-cloud-gcp-starter-storage")
-}
-
-dependencyManagement {
-//	imports {
-//		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-//	}
 }
 
 tasks.withType<Test> {
