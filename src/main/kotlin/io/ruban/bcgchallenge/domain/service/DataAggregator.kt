@@ -17,26 +17,28 @@ class DataAggregator(
 
     fun generateChart(top: Int): List<RatedSongView> {
         val charted: List<RatedSong> = ratedSongRepository.getChunk(chunk = top)
-
-        return charted.mapIndexed { index, song ->
-            RatedSongView(
-                    rank = index + 1,
-                    isrc = song.isrc,
-                    trackName = song.trackName,
-                    artistName = song.artistName,
-                    gain = "${song.gain} ${Currency.EUR.name}"
-            )
-        }
+        return mapChartedToView(charted)
     }
 
     fun handleReports(chunk: Int) {
         val reported: List<ReportSong> = reportSongRepository.getChunkAndDelete(chunk)
-        val rated: List<RatedSong> = map(reported)
+        val rated: List<RatedSong> = mapReport(reported)
         ratedSongRepository.persist(rated)
     }
 
+    private fun mapChartedToView(charted: List<RatedSong>): List<RatedSongView> = charted.mapIndexed { index, song ->
+        RatedSongView(
+                rank = index + 1,
+                isrc = song.isrc,
+                trackName = song.trackName,
+                artistName = song.artistName,
+                gain = mapGain(song.gain)
+        )
+    }
 
-    private fun map(reported: List<ReportSong>): List<RatedSong> = reported.map {
+    private fun mapGain(amount: Double): String = "${String.format("%.2f", amount)} ${Currency.EUR.name}"
+
+    private fun mapReport(reported: List<ReportSong>): List<RatedSong> = reported.map {
         RatedSong(
                 isrc = it.isrc,
                 trackName = it.trackName,

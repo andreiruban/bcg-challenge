@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.ruban.bcgchallenge.TestData
 import io.ruban.bcgchallenge.domain.model.RatedSong
+import io.ruban.bcgchallenge.domain.model.RatedSongView
 import io.ruban.bcgchallenge.domain.repository.RatedSongRepository
 import io.ruban.bcgchallenge.domain.repository.ReportSongRepository
 import io.ruban.bcgchallenge.domain.util.Currency
@@ -68,6 +69,38 @@ class DataAggregatorTest {
 
     @Test
     fun `should generate a chart`() {
+        val song1 = TestData.randomRatedSong(gain = 30.55)
+        val song2 = TestData.randomRatedSong(gain = 130.55)
+        val song3 = TestData.randomRatedSong(gain = 1.55)
+        whenever(ratedRepository.getChunk(eq(3))).thenReturn(listOf(song2, song1, song3))
 
+        val chart: List<RatedSongView> = unit.generateChart(3)
+        assertTrue(chart.isNotEmpty())
+        assertEquals(
+                listOf(
+                        RatedSongView(
+                                rank = 1,
+                                isrc = song2.isrc,
+                                trackName = song2.trackName,
+                                artistName = song2.artistName,
+                                gain = "${String.format("%.2f", song2.gain)} ${Currency.EUR.name}"
+                        ),
+                        RatedSongView(
+                                rank = 2,
+                                isrc = song1.isrc,
+                                trackName = song1.trackName,
+                                artistName = song1.artistName,
+                                gain = "${String.format("%.2f", song1.gain)} ${Currency.EUR.name}"
+                        ),
+                        RatedSongView(
+                                rank = 3,
+                                isrc = song3.isrc,
+                                trackName = song3.trackName,
+                                artistName = song3.artistName,
+                                gain = "${String.format("%.2f", song3.gain)} ${Currency.EUR.name}"
+                        )
+                ),
+                chart
+        )
     }
 }
