@@ -1,7 +1,7 @@
 package io.ruban.bcgchallenge.job
 
-import io.ruban.bcgchallenge.domain.service.ReportBatcher
 import io.ruban.bcgchallenge.domain.service.DataAggregator
+import io.ruban.bcgchallenge.domain.service.ReportBatcher
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
@@ -11,13 +11,13 @@ class Jobs(
         val dataAggregator: DataAggregator
 ) {
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(initialDelay = 0, fixedRate = 500)
     fun batchReports() {
         reportBatcher.batchReportFolder()
     }
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(initialDelay = 100, fixedRate = 500)
     fun aggregateData() {
-        dataAggregator.rateSongs(chunk = 10_000)
+        dataAggregator.handleReports(chunk = 10_000)
     }
 }

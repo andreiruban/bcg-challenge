@@ -15,7 +15,7 @@ class DataAggregator(
         private val ratedSongRepository: RatedSongRepository
 ) {
 
-    fun chart(top: Int): List<RatedSongView> {
+    fun generateChart(top: Int): List<RatedSongView> {
         val charted: List<RatedSong> = ratedSongRepository.getChunk(chunk = top)
 
         return charted.mapIndexed { index, song ->
@@ -29,7 +29,7 @@ class DataAggregator(
         }
     }
 
-    fun rateSongs(chunk: Int) {
+    fun handleReports(chunk: Int) {
         val reported: List<ReportSong> = reportSongRepository.getChunkAndDelete(chunk)
         val rated: List<RatedSong> = map(reported)
         ratedSongRepository.persist(rated)
