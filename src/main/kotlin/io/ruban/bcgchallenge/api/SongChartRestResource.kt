@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-class HttpController(
+class SongChartRestResource(
         private val dataAggregator: DataAggregator
 ) {
 
