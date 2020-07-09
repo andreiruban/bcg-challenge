@@ -1,6 +1,19 @@
 ## BCG Challenge
 
 ### About
+Reports batching and handling are done asynchronously from performance perspectives.
+There are two scheduled jobs:
+
+- batchReportFolder - takes files from report folder, parse them and store.
+- handleReports - converts the reports to target currency and calculates the gain.
+
+There is one REST endpoint returns target song chart representation.
+
+### Tech stack:
+- Kotlin as a programming language
+- Built by Gradle
+- Spring Boot as framework
+- Data structures as in-memory db simulation :)
 
 ### API
 The app offers single REST API endpoint representing songs chart sorted by descending profit.
