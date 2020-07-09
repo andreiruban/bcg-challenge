@@ -13,7 +13,7 @@ class SongChartRestResource(
 ) {
 
     @GetMapping("/songs/charts")
-    fun getChart(@RequestParam("top") top: Int): ChartContainer {
+    fun getChart(@RequestParam(value = "top", defaultValue = "5") top: Int): ChartContainer {
         val chart = dataAggregator.generateChart(top)
         return ChartContainer(chart = chart, generatedAt = OffsetDateTime.now())
     }
