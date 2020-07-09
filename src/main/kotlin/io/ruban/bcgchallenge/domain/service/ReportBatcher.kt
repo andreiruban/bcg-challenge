@@ -16,13 +16,14 @@ class ReportBatcher(
 ) {
     private val path = "classpath:reports/*${CSV_EXTENSION}"
 
-    private val batched: Set<String> = HashSet()
+    private val batched: MutableSet<String> = HashSet()
 
     fun batchReportFolder() {
         val file = retrieveNewFile(path)
-        file?.let {
+        file?.run {
             val parsed = csvParser.parseReport(file)
             repository.persist(parsed)
+            batched.add(this.name)
         }
     }
 
