@@ -3,7 +3,6 @@ package io.ruban.bcgchallenge.domain.service
 import io.ruban.bcgchallenge.domain.repository.ReportSongRepository
 import io.ruban.bcgchallenge.domain.util.CsvParser
 import org.springframework.core.io.support.ResourcePatternResolver
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.io.File
 
@@ -21,7 +20,6 @@ class ReportBatcher(
 
     fun batchReportFolder() {
         val file = retrieveNewFile(path)
-        // TODO: figure out .let
         file?.let {
             val parsed = csvParser.parseReport(file)
             repository.persist(parsed)
