@@ -1,0 +1,30 @@
+## BCG Challenge
+
+### Playbook
+
+#### Requirements
+- Java 1.8
+- Gradle 6.3 (than newer than better)
+* [Official Gradle documentation](https://docs.gradle.org)
+- IDE (Intellij Idea, Eclipse, etc) - Optional
+- Git
+
+#### Setup
+. Install the environment (Java, Gradle, Git)
+. Request access to the repository - andreiruban1991@gmail.com
+. Clone the repository
+    $ git clone https://github.com/andreiruban/bcg-challenge.git
+
+#### Build & Run
+. Go to the project root folder
+. Building a project with gradle
+
+    $   ./gradlew clean build --parallel
+
+. Run it
+
+    $   ./gradlew bootRun
+
+### API
+
+
