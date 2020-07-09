@@ -1,5 +1,34 @@
 ## BCG Challenge
 
+### About
+
+### API
+The app offers single REST API endpoint representing songs chart sorted by descending profit.
+
+. Endpoint URI:
+
+    /songs/charts
+
+. Query parameter:
+
+    "top" - define the size of generated chart. Default value: "5"
+
+.Example schema:
+
+    {
+        "chart": [
+            {
+                "rank":1,
+                "isrc":"G853C3770233",
+                "trackName":"Let's Talk About Love",
+                "artistName":"Primal Scream",
+                "gain":"5,60 EUR"
+            }
+        ],
+        "generatedAt":"2020-07-10T01:20:56.00787+02:00"
+    }
+
+
 ### Playbook
 
 #### Requirements
@@ -25,6 +54,6 @@
 
     $   ./gradlew bootRun
 
-### API
+. Test the API
 
-
+    $   curl -X GET 'localhost:8080/songs/charts?top=4'
