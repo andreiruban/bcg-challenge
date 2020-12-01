@@ -54,6 +54,7 @@ The app offers single REST API endpoint representing songs chart sorted by desce
 #### Setup
 . Install the environment (Java, Gradle, Git)
 . Clone the repository
+
     $ git clone https://github.com/andreiruban/bcg-challenge.git
 
 #### Build & Run
